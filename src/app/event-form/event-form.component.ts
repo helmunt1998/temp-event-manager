@@ -33,7 +33,8 @@ export class EventFormComponent implements OnInit {
   formDetail!: FormGroup;
 
   ngOnInit(): void {
-    this.eventId = this.route.snapshot.paramMap.get('id');
+    const idParam = this.route.snapshot.paramMap.get('id');
+    this.eventId = idParam !== null ? Number(idParam) : null;
 
     this.formDetail = this.form.group({
       eventName: ['', [Validators.required]],
@@ -43,7 +44,21 @@ export class EventFormComponent implements OnInit {
       eventLocation: ['', [Validators.required]]
     });
     
-    this.eventService
+    if (this.eventId !== null) {
+      this.eventService.getEventById(this.eventId).subscribe((event: IEvent) => {
+        this.IEvent = event;
+        this.formDetail.patchValue({
+          eventName: this.IEvent.name,
+          eventDate: this.IEvent.date,
+          eventTime: this.IEvent.time,
+          eventDescription: this.IEvent.description,
+          eventLocation: this.IEvent.location
+        });
+      }),
+      (error: any) => {
+        console.log("Ocurrio un error al traer el evento: ",error);
+      }
+    }
   }
 
   onEdit(): void {
