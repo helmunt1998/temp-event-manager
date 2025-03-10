@@ -58,11 +58,11 @@ export class WebApiService {
   }
 
   createEvent(eventData: any): Observable<any> {
-    return this.http.post<any>(this.apiInquiry, eventData);
+    return this.http.post<any>(this.genApi, eventData);
   }
 
   updateEvent(id: number, eventData: IEvent): Observable<any> {
-    return this.http.put<IEvent>(`${this.apiInquiry}/${id}`, eventData).pipe(
+    return this.http.put<IEvent>(`${this.genApi}/${id}`, eventData).pipe(
       catchError((e) => {
         throw e;
       })

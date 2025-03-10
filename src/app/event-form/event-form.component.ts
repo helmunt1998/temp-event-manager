@@ -68,9 +68,10 @@ export class EventFormComponent implements OnInit {
     }
   }
 
+  // Formatea la fecha para mostrarla en el input el formato origen es yyyy-mm-ddT00:00:00+00:00, el formato destino es yyyy/mm/dd
   formatDate(date: string): string {
-    const dateArr = date.split('T');
-    return dateArr[0];
+    const dateArr = date.split('-');
+    return `${dateArr[0]}/${dateArr[1]}/${dateArr[2].split('T')[0]}`;
   }
 
   formatBackDate(date: string): string {
