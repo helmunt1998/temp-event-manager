@@ -1,11 +1,11 @@
 # Temp Event Manager
 
-Este es un proyecto Angular para gestionar eventos temporales. Hace parte del módulo Front que, a su vez, complementa el Backend en:
+Este es un proyecto Angular para gestionar eventos temporales. Hace parte del módulo Front que, a su vez, complementa el Backend en: [Event Manager Backend](https://github.com/helmunt1998/kata-event-manager-backend)
 
 ## Ficha técnica
 
 * Angular: 18.0.2
-* Frameworks para diseño: Sherpa 6.0.7 - Más información en: `https://sherpadesignsystem.labdigitalbdbtvs.com/home`
+* Frameworks para diseño: Sherpa 6.0.7 - Más información en: [Sherpa Design System](https://sherpadesignsystem.labdigitalbdbtvs.com/home)
 
 ## Instalación
 
