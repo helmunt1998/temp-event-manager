@@ -54,13 +54,12 @@ export class WebApiService {
   }
 
   getEventById(id: number): Observable<any> {
-    return this.http.get<IEvent>(`${this.apiInquiry}/${id}`);
+    return this.http.get<IEvent>(`${this.genApi}/${id}`);
   }
 
   createEvent(eventData: any): Observable<any> {
     return this.http.post<any>(this.apiInquiry, eventData);
   }
-
 
   updateEvent(id: number, eventData: any): Observable<any> {
     return this.http.put<any>(`${this.apiInquiry}/${id}`, eventData).pipe(
@@ -69,7 +68,6 @@ export class WebApiService {
       })
     );
   }
-
 
   deleteEvent(id: number): Observable<IEvent> {
     return this.http.delete<IEvent>(`${this.genApi}/${id}`);
