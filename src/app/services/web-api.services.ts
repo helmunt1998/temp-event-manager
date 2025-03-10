@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthPpe, cardServiceStatus, IEvent, RequestBodyInquiry, RequestBodyModify } from '../models/model';
-import { Observable, catchError, pipe } from 'rxjs';
+import { IEvent } from '../models/model';
+import { Observable, catchError } from 'rxjs';
 import { environment } from '../environments/environment';
 
 @Injectable({
@@ -9,41 +9,9 @@ import { environment } from '../environments/environment';
 })
 export class WebApiService {
   private readonly genApi: string = environment.apiMain;
-  private authRoute: string = environment.authApi;
   private readonly apiInquiry: string = environment.apiInquiry;
-  private apiModify: string = environment.apiModify;
 
-  constructor(private http: HttpClient) { }
-
-  getAuth(): Observable<AuthPpe> {
-    let params = new HttpParams()
-      .set('ppe', localStorage.getItem('ppe')!)
-      .set('sid', localStorage.getItem('sid')!);
-    const url = `${this.authRoute}`;
-    return this.http.get<AuthPpe>(url, { params }).pipe(
-      catchError((e) => {
-        throw e;
-      })
-    );
-  }
-
-  getCardProductInquiry(requestBody: RequestBodyInquiry): Observable<RequestBodyInquiry> {
-    const url = `${this.genApi}/${this.apiInquiry}`;
-    return this.http.post<RequestBodyInquiry>(url, requestBody).pipe(
-      catchError((e) => {
-        throw e;
-      })
-    );
-  }
-
-  modifyDebitCard(requestBodyModify: RequestBodyModify): Observable<cardServiceStatus> {
-    const url = `${this.genApi}/${this.apiModify}`;
-    return this.http.post<cardServiceStatus>(url, requestBodyModify).pipe(
-      catchError((e) => {
-        throw e;
-      })
-    );
-  }
+  constructor(private readonly http: HttpClient) { }
 
   getEvents(): Observable<IEvent[]> {
     return this.http.get<IEvent[]>(this.apiInquiry).pipe(
