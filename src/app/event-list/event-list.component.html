@@ -5,4 +5,8 @@
     </div>
     <sp-ml-modal #modalNotification icon="warning" title-modal="Alert" sub-title=' ' options-buttons='[{"id":"0","value":"Continuar"}]' (buttonAlertClicked)="modalButtonAction($event, eventValue)"></sp-ml-modal>
     <sp-at-toast #simpleToast type="SUCCESS" title-toast="SUCCESS" text-desc="Valor" is-close="true"></sp-at-toast>
+    <div class="button">
+        <button class='sp-at-btn sp-at-btn--primary sp-at-btn--lg' (click)="onClick()"><span
+                class='ico-add-large' ></span>Agregar evento</button>
+    </div>
 </section>

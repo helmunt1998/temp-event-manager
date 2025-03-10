@@ -57,8 +57,12 @@ export class WebApiService {
     return this.http.get<IEvent>(`${this.genApi}/${id}`);
   }
 
-  createEvent(eventData: any): Observable<any> {
-    return this.http.post<any>(this.genApi, eventData);
+  createEvent(eventData: IEvent): Observable<any> {
+    return this.http.post<IEvent>(this.genApi, eventData).pipe(
+      catchError((e) => {
+        throw e;
+      })
+    );;
   }
 
   updateEvent(id: number, eventData: IEvent): Observable<any> {

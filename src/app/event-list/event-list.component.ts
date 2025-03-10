@@ -32,10 +32,11 @@ export class EventListComponent implements AfterViewInit {
     { colName: "Ubicación", control: "text" },
     { colName: "Editar evento", control: "ico-action" },
     { colName: "Elminar evento", control: "ico-action" },
+    { colName: "Ver evento", control: "ico-action" },
   ];
   validDelete = ['ico-add-delete'];
   validEdit = ['ico-write-edit'];
-
+  validView = ['ico-open-view'];
   constructor(
     private readonly eventService: WebApiService,
     private readonly modalService: ModalService,
@@ -55,9 +56,11 @@ export class EventListComponent implements AfterViewInit {
       this.confirmAction(event, 'delete');
     } else if(this.validEdit.some((button: any) => event.detail.button.includes(button))){
       console.log(event.detail.data);
-      this.confirmAction(event, 'edit');
-      this.router.navigate(['/edit-event', event.detail.data.id]);
-    }
+      this.router.navigate(['/edit-event', event.detail.data.id], { state: {mode: 'full-edit'}});
+    } else if(this.validView.some((button: any) => event.detail.button.includes(button))){
+      console.log(event.detail.data);
+      this.router.navigate(['/edit-event', event.detail.data.id], { state: {mode: 'only-view'}});
+    } 
   }
 
   fetchAllEvents(): void {
@@ -71,7 +74,9 @@ export class EventListComponent implements AfterViewInit {
           description: events[index].description,
           location: events[index].location,
           editButton: "ico-write-edit",
-          deleteButton: "ico-add-delete"
+          deleteButton: "ico-add-delete",
+          viewButton: "ico-open-view"
+
         })) 
         : [];
         console.log(events);
@@ -146,6 +151,10 @@ export class EventListComponent implements AfterViewInit {
         this.modalNotification.nativeElement.handleCloseClick();
       }
     }
+  }
+
+  onClick(){
+    this.router.navigate(['/edit-event'], { state: {mode: 'add-event'}});
   }
 
   reloadPage() {

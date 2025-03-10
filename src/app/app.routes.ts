@@ -9,6 +9,7 @@ export const routes: Routes = [
     { path: 'create-event', component: EventFormComponent, canActivate: [AuthGuard] },
     { path: 'fetch-events', component: EventListComponent, canActivate: [AuthGuard]  },
     { path: 'edit-event/:id', component: EventFormComponent, canActivate: [AuthGuard] },
+    { path: 'edit-event', component: EventFormComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: '**', redirectTo: 'login' }
