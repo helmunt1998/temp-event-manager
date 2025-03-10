@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { WebApiService } from '../services/web-api.services';
 import { IEvent } from '../models/model';
 import { ModalService } from '../services/modal/modal.service';
@@ -37,8 +38,9 @@ export class EventListComponent implements AfterViewInit {
 
   constructor(
     private readonly eventService: WebApiService,
-    private readonly toastService: ToastService, 
-    private readonly modalService: ModalService
+    private readonly modalService: ModalService,
+    private readonly toastService: ToastService,
+    private readonly router: Router,
   ){}
 
   ngAfterViewInit(): void {
@@ -54,6 +56,7 @@ export class EventListComponent implements AfterViewInit {
     } else if(this.validEdit.some((button: any) => event.detail.button.includes(button))){
       console.log(event.detail.data);
       this.confirmAction(event, 'edit');
+      this.router.navigate(['/edit-event', event.detail.data.id]);
     }
   }
 
