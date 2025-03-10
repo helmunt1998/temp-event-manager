@@ -35,7 +35,7 @@ export class AuthService {
 
   private storeToken(token: string, expiresIn: number): void {
     localStorage.setItem(this.tokenKey, token);
-    localStorage.setItem(this.expiresInKey, (expiresIn).toString());
+    localStorage.setItem(this.expiresInKey, (Date.now() + expiresIn * 1000).toString());
   }
 
   getToken(): string | null {
