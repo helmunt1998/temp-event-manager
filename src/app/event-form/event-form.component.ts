@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA, type OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, ViewChild, type OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IEvent } from '../models/model';
 import { WebApiService } from '../services/web-api.services';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastService } from '../services/modal/toast.service';
 
 @Component({
   selector: 'app-event-form',
@@ -15,6 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EventFormComponent implements OnInit {
 
+  @ViewChild('editedToast') toast!: ElementRef;
   eventId: number | null = null;
   inputStatus: string = 'ENABLED';
   IEvent: IEvent = {
@@ -27,8 +29,10 @@ export class EventFormComponent implements OnInit {
   }
   constructor(
     private readonly form: FormBuilder,
-    private readonly route: ActivatedRoute, 
-    private readonly eventService: WebApiService) { }
+    private readonly route: ActivatedRoute,
+    private readonly toastService: ToastService, 
+    private readonly eventService: WebApiService,
+    private readonly router: Router) { }
 
   formDetail!: FormGroup;
 
@@ -45,35 +49,73 @@ export class EventFormComponent implements OnInit {
     });
     
     if (this.eventId !== null) {
-      this.eventService.getEventById(this.eventId).subscribe((event: IEvent) => {
-        this.IEvent = event;
-        this.formDetail.patchValue({
-          eventName: this.IEvent.name,
-          eventDate: this.IEvent.date,
-          eventTime: this.IEvent.time,
-          eventDescription: this.IEvent.description,
-          eventLocation: this.IEvent.location
-        });
-      }),
-      (error: any) => {
-        console.log("Ocurrio un error al traer el evento: ",error);
-      }
+      this.eventService.getEventById(this.eventId).subscribe({
+        next: (event: IEvent) => {
+          this.IEvent = event;
+          this.formDetail.patchValue({
+            eventName: this.IEvent.name,
+            eventDate: this.formatDate(this.IEvent.date),
+            eventTime: this.IEvent.time,
+            eventDescription: this.IEvent.description,
+            eventLocation: this.IEvent.location
+          });
+        },
+        error: (error: any) => {
+          
+          console.log("Ocurrio un error al traer el evento: ", error);
+        }
+      });
     }
+  }
+
+  formatDate(date: string): string {
+    const dateArr = date.split('T');
+    return dateArr[0];
+  }
+
+  formatBackDate(date: string): string {
+    const dateArr = date.split('/');
+    return `${dateArr[0]}-${dateArr[1]}-${dateArr[2]}T00:00:00+00:00`;
   }
 
   onEdit(): void {
     if (this.formDetail.valid) {
-      this.createEvent();
+      this.editEvent();
     }
   }
 
-  createEvent(): void {
+  editEvent(): void {
     this.IEvent = {
       name: this.formDetail.get('eventName')?.value,
       description: this.formDetail.get('eventDescription')?.value,
-      date: this.formDetail.get('eventDate')?.value,
+      date: this.formatBackDate(this.formDetail.get('eventDate')?.value),
       time: this.formDetail.get('eventTime')?.value,
       location: this.formDetail.get('eventLocation')?.value
+    }
+    if (this.eventId !== null) {
+      this.eventService.updateEvent(this.eventId, this.IEvent).subscribe({
+        next: (event: IEvent) => {
+          console.log("Evento actualizado: ", event);
+          this.toastService.openToast(
+            '¡Confirmado!',
+            'El evento ha sido editado correctamente',
+            'SUCCESS'
+          );
+          this.inputStatus = 'DISABLED';
+          setTimeout(() => {
+            this.toast.nativeElement.close();
+            this.router.navigate(['/fetch-events']);
+          }, 5000);
+        },
+        error: (error: any) => {
+          console.log("Ocurrio un error al actualizar el evento: ", error);
+          this.toastService.openToast(
+            'Error',
+            'Ocurrió un error al intentar editar el evento',
+            'ERROR'
+          );
+        }
+      });
     }
     console.log(this.IEvent);
   }

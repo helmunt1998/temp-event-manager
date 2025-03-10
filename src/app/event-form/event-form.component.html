@@ -3,7 +3,7 @@
         <div class="inputCampos">
             <h1> Edición de eventos</h1>
         </div>
-        <h5 class="inputCampos">Detalles del evento</h5>
+        <h5 class="inputCampos">Detalles del evento:  {{ eventId }}</h5>
         <div class="contenedor">
             <div class="inputCampos">
                 <sp-at-input ngDefaultControl id="eventName" formControlName="eventName" label="Título del evento" message="" 
@@ -44,4 +44,5 @@
                     class='ico-check-ok'></span>Editar</button>
         </div>
     </form>
+    <sp-at-toast #editedToast type="SUCCESS" title-toast="SUCCESS" text-desc="Valor" is-close="true"></sp-at-toast>
 </section>

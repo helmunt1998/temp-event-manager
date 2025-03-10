@@ -61,8 +61,8 @@ export class WebApiService {
     return this.http.post<any>(this.apiInquiry, eventData);
   }
 
-  updateEvent(id: number, eventData: any): Observable<any> {
-    return this.http.put<any>(`${this.apiInquiry}/${id}`, eventData).pipe(
+  updateEvent(id: number, eventData: IEvent): Observable<any> {
+    return this.http.put<IEvent>(`${this.apiInquiry}/${id}`, eventData).pipe(
       catchError((e) => {
         throw e;
       })
