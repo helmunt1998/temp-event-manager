@@ -33,6 +33,7 @@ export class EventListComponent implements AfterViewInit {
     { colName: "Elminar evento", control: "ico-action" },
   ];
   validDelete = ['ico-add-delete'];
+  validEdit = ['ico-write-edit'];
 
   constructor(
     private readonly eventService: WebApiService,
@@ -50,6 +51,9 @@ export class EventListComponent implements AfterViewInit {
     if (this.validDelete.some((button: any) => event.detail.button.includes(button))) {
       console.log(event.detail.data);
       this.confirmAction(event, 'delete');
+    } else if(this.validEdit.some((button: any) => event.detail.button.includes(button))){
+      console.log(event.detail.data);
+      this.confirmAction(event, 'edit');
     }
   }
 
@@ -87,7 +91,7 @@ export class EventListComponent implements AfterViewInit {
         'warning',
         [{ id: '0', value: 'Borrar' }, { id: '1', value: 'cancelar' }]
       );
-    }
+    } 
   }
   
   onDeleteConfirmed(id: number): void {

@@ -1,4 +1,5 @@
 <section>
+    <sp-at-toast #editedToast type="SUCCESS" title-toast="SUCCESS" text-desc="Valor" is-close="true"></sp-at-toast>
     <form [formGroup]="formDetail" (ngSubmit)="onEdit()">
         <div class="inputCampos">
             <h1> Edición de eventos</h1>
@@ -40,9 +41,8 @@
             </div>
         </div>
         <div class="button">
-            <button class='sp-at-btn sp-at-btn--primary sp-at-btn--lg' [disabled]="formDetail.invalid "><span
+            <button class='sp-at-btn sp-at-btn--primary sp-at-btn--lg' [disabled]="formDetail.invalid || buttonActive"><span
                     class='ico-check-ok'></span>Editar</button>
         </div>
     </form>
-    <sp-at-toast #editedToast type="SUCCESS" title-toast="SUCCESS" text-desc="Valor" is-close="true"></sp-at-toast>
 </section>

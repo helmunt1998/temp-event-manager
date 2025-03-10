@@ -17,6 +17,7 @@ import { ToastService } from '../services/modal/toast.service';
 export class EventFormComponent implements OnInit {
 
   @ViewChild('editedToast') toast!: ElementRef;
+  buttonActive: boolean = false;
   eventId: number | null = null;
   inputStatus: string = 'ENABLED';
   IEvent: IEvent = {
@@ -103,8 +104,8 @@ export class EventFormComponent implements OnInit {
             'SUCCESS'
           );
           this.inputStatus = 'DISABLED';
+          this.buttonActive = true;
           setTimeout(() => {
-            this.toast.nativeElement.close();
             this.router.navigate(['/fetch-events']);
           }, 5000);
         },
