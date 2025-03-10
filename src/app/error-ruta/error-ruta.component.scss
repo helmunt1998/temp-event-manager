@@ -1,0 +1,13 @@
+.contenedor {
+    display: flex;
+    justify-content: center; 
+    align-items: center;   
+    height: 40vh;
+}
+
+.contenedor sp-at-alert {
+    width: 80%;           
+    max-width: 600px;     
+    font-size: 18px;      
+    padding: 20px;        
+}

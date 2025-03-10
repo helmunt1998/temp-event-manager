@@ -1,0 +1,8 @@
+<section #UserListsSection>
+    <h5>Información de los eventos registrados</h5>
+    <div class="inputCampos">
+            <sp-ml-dynamic-table [columnTable]="columnTable" [rowTable]="rowTable" (buttonClick)="onRowSelected($event)"></sp-ml-dynamic-table>
+    </div>
+    <sp-ml-modal #modalNotification icon="warning" title-modal="Alert" sub-title=' ' options-buttons='[{"id":"0","value":"Continuar"}]' (buttonAlertClicked)="modalButtonAction($event, eventValue)"></sp-ml-modal>
+    <sp-at-toast #simpleToast type="SUCCESS" title-toast="SUCCESS" text-desc="Valor" is-close="true"></sp-at-toast>
+</section>

@@ -1,0 +1,19 @@
+
+  <div class="login" style="display: flex; justify-content: space-between; align-items: center;">
+    <div class="login-form-container">
+      <sp-tp-xcenter-login-form  [loginTitle]="loginTitle">
+        <sp-ml-xcenter-login-form
+          slot="slot-content"
+          [elements]="loginElements"
+          [formGroup]="loginForm"
+          [can-continue]="true"
+          [can-continue-btn]="false"
+          [loginSubtitle]="loginSubtitle"
+          label-button="Ingresar"
+          (infoSubmit)="login($event)"
+        >
+        </sp-ml-xcenter-login-form>
+      </sp-tp-xcenter-login-form>
+    </div>
+  </div>
+  <sp-at-toast #modalToast type="ERROR" title-toast="Error" text-desc="El usuario o contraseña no son correctos" is-close="true"></sp-at-toast>

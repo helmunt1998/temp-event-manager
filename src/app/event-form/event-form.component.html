@@ -1,0 +1,47 @@
+<section>
+    <form [formGroup]="formDetail" (ngSubmit)="onEdit()">
+        <div class="inputCampos">
+            <h1> Edición de eventos</h1>
+        </div>
+        <h5 class="inputCampos">Detalles del evento</h5>
+        <div class="contenedor">
+            <div class="inputCampos">
+                <sp-at-input ngDefaultControl id="eventName" formControlName="eventName" label="Título del evento" message="" 
+                    placeholder="#" type="TEXT" [status]="inputStatus" icon="ico-form-pencil" required="true"></sp-at-input>
+                    @if(formDetail.get("eventName")?.invalid && formDetail.get("eventName")?.touched){
+                        @if(formDetail.get("eventName")?.hasError("required")){
+                            <small class="mensajeError">Título del evento no puede estar vacío</small>
+                        }
+                    }
+                    <sp-at-input ngDefaultControl id="eventDate" formControlName="eventDate" label="Fecha del evento" message="" 
+                    placeholder="#" type="TEXT" [status]="inputStatus" icon="ico-calendar-info"  required="true"></sp-at-input>
+                    @if(formDetail.get("eventDate")?.invalid && formDetail.get("eventDate")?.touched){
+                        @if(formDetail.get("eventDate")?.hasError("required")){
+                            <small class="mensajeError">Fecha no puede ir vacío</small>
+                        }
+                    }
+                    <sp-at-input ngDefaultControl id="eventTime" formControlName="eventTime" label="Hora del evento" message="" 
+                    placeholder="#" type="TEXT" [status]="inputStatus" icon="ico-calendar-time"  required="true" ></sp-at-input>
+                    @if(formDetail.get("eventTime")?.invalid && formDetail.get("eventTime")?.touched){
+                        @if(formDetail.get("eventTime")?.hasError("required")){
+                            <small class="mensajeError">Hora no puede estar vacío</small>
+                        }
+                    }
+                    <sp-at-input ngDefaultControl id="eventDescription" formControlName="eventDescription" label="Descripción del evento" message="" 
+                    placeholder="#" type="TEXT" [status]="inputStatus" icon="ico-read-search" required="false"></sp-at-input>
+                    
+                    <sp-at-input ngDefaultControl id="eventLocation" formControlName="eventLocation" label="Ubicación del evento" message="" 
+                    placeholder="#" type="TEXT" [status]="inputStatus" icon="ico-ubication-pin" required="true"></sp-at-input>
+                    @if(formDetail.get("eventLocation")?.invalid && formDetail.get("eventLocation")?.touched){
+                        @if(formDetail.get("eventLocation")?.hasError("required")){
+                            <small class="mensajeError">Ubicación de evento no puede ir vacío</small>
+                        }
+                    }
+            </div>
+        </div>
+        <div class="button">
+            <button class='sp-at-btn sp-at-btn--primary sp-at-btn--lg' [disabled]="formDetail.invalid "><span
+                    class='ico-check-ok'></span>Editar</button>
+        </div>
+    </form>
+</section>

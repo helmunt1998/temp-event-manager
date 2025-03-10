@@ -1,0 +1,24 @@
+<section #bloquearSection>
+  <form [formGroup]="formularioBloquear" (ngSubmit)="onBloquear()">
+    <h5>Bloquear Tarjeta</h5>
+    <div class="alerta">
+      @if(agregarDialogo){
+        <sp-at-alert #alertNoti type="WARNING" alert-title="Notificación de bloqueo tarjeta" description="¿Estas seguro que deseas bloquear la tarjeta?" button-text="Sí" close-button=true (buttonClickedEvent)="cerrarModal()" (alertClosedEvent)="onCerrarAlerta()"></sp-at-alert>
+      }
+    </div>
+    <div class="contenedor">
+      <div class="inputCampos">
+        <sp-at-input label="Bloqueo tarjeta" message="" type="TEXT" status="DISABLED" icon="ico-tc" maxlength="20"
+          required="true" [value]="tarjetaSeleccionada" readonly></sp-at-input>
+      </div>
+      <div class="inputCampos">
+        <sp-at-input label="Tipo de bloqueo" message="" type="TEXT" status="DISABLED" icon="ico-padlock-lock"
+          maxlength="20" required="true" id="tipoBloqueo" [value]="tipoBloqueo" readonly></sp-at-input>
+      </div>
+    </div>
+    <div class="boton" >
+      <button class='sp-at-btn sp-at-btn--primary sp-at-btn--lg--ico' [disabled]="deshabilitarBoton"><span
+          class='ico-padlock-lock' ></span >Bloquear</button>
+    </div>
+  </form>
+</section>

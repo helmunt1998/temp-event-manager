@@ -1,0 +1,61 @@
+.inputCampos {
+    width: 50%;
+    padding: 10px;
+}
+
+h1 {
+    font-family: Roboto-Medium;
+    font-size: 1.5rem;
+    line-height: 2.2rem;
+    letter-spacing: 0rem;
+    border-bottom: #e6e6e6 1px solid;
+    font-weight: normal;
+    padding: 0px 0px 0px 0px;
+}
+
+h5 {
+    font-family: Roboto-Medium;
+    font-size: 1.1rem;
+    line-height: 2.00rem;
+    letter-spacing: 0rem;
+    border-bottom: #e6e6e6 1px solid;
+    font-weight: normal;
+    padding: 0px 2px 0px 10px;
+}
+
+img {
+    width: 20px; 
+    height: 20px; 
+    margin-left: 6px;
+}
+
+.contenedor {
+    display: flex;
+    justify-content: center;
+}
+
+.boton {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 10px;
+}
+
+.boton button {
+    padding: 5px 10px;
+    font-size: 16px;
+    width: 200px;
+}
+
+.mensajeError {
+    color: #c94740;
+    font-family: Roboto-Regular;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.013rem;
+    font-weight: normal;
+}
+
+.input-error {
+    border-color: red; /* Color para inputs con errores */
+}

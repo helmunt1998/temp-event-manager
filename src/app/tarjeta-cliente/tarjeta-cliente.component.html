@@ -1,0 +1,10 @@
+<section #tarjetaClienteSection>
+    <h5>Información Tarjeta Cliente</h5>
+    <div hidden class="inputCampos">
+        <sp-at-input label="Nombre Cliente:" message="" type="TEXT" status="DISABLED" icon="ico-customerservice"
+            required="true" [value]="nombre" readonly></sp-at-input>
+    </div>
+    <div class="inputCampos">
+            <sp-ml-dynamic-table [columnTable]="columnTable" [rowTable]="rowTable" (buttonClick)="onFilaSeleccionada($event)"></sp-ml-dynamic-table>
+    </div>
+</section>
